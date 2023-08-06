@@ -1,0 +1,7 @@
+.clock {
+    margin: 50px auto;
+    border: 1px solid darkblue;
+    padding: 15px;
+    max-width: 200px;
+    font-size: 25px;
+}
