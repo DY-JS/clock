@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import cls from "./clock.module.css"
+import {AnalogView} from "./AnalogView";
+import {DigitalView} from "./DigitalView";
 
-const Clock = () => {
+export type PropsType = {
+    mode?: 'analog' | 'digital'
+}
+
+export type DateType = {
+    date: Date
+}
+
+export const Clock = ({mode}: PropsType) => {
     const [date, setDate] = useState(new Date())
-
-    const transformDigits = (value: number) => {
-        return value < 10 ? '0' + value : value
-    }
 
     useEffect(() => {
         const interval = setInterval(() => setDate(new Date()), 1000);
@@ -15,12 +20,11 @@ const Clock = () => {
     }, [])
 
     return (
-        <div className={cls.clock}>
-            <span>{transformDigits(date.getHours())}:</span>
-            <span>{transformDigits(date.getMinutes())}:</span>
-            <span>{transformDigits(date.getSeconds())}</span>
+        <div>
+            {mode === 'digital'
+                ? <DigitalView date={date}/>
+                : <AnalogView date={date}/>
+            }
         </div>
     );
 };
-
-export default Clock;
